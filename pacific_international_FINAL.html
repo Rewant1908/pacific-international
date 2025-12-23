@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacific International | Global Coffee Trade Excellence</title>
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23C49A6C'/><path d='M50 25 L35 45 L50 40 L65 45 Z' fill='%23001F3F'/></svg>">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --navy-deep: #001F3F;
+            --navy-primary: #003366;
+            --navy-accent: #1A4D7F;
+            --gold-primary: #C49A6C;
+            --gold-bright: #D4AF37;
+            --gold-light: #E8D4B0;
+            --cream-dark: #F5EFE7;
+            --cream-light: #FAF7F2;
+            --charcoal: #2C3E50;
+            --slate: #576574;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            overflow-x: hidden;
+            background: var(--cream-light);
+        }
+
+        .heading-font {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        /* VANTA BACKGROUND */
+        .vanta-bg {
+            position: absolute;
+            z-index: 0;
+            width: 100%;
+            height: 100vh;
+            top: 0;
+            left: 0;
+        }
+
+        /* PROMINENT COFFEE BEAN DECORATIONS */
+        .coffee-bean {
+            position: absolute;
+            font-size: 5rem;
+            opacity: 0.18;
+            pointer-events: none;
+            z-index: 5;
+            filter: drop-shadow(0 4px 8px rgba(196, 154, 108, 0.3));
+        }
+
+        @keyframes floatBean {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, -70px) rotate(90deg); }
+            50% { transform: translate(0, -140px) rotate(180deg); }
+            75% { transform: translate(-50px, -70px) rotate(270deg); }
+        }
+
+        .bean-1 { animation: floatBean 22s ease-in-out infinite; }
+        .bean-2 { animation: floatBean 28s ease-in-out infinite; animation-delay: 7s; }
+        .bean-3 { animation: floatBean 25s ease-in-out infinite; animation-delay: 14s; }
+        .bean-4 { animation: floatBean 30s ease-in-out infinite; animation-delay: 21s; }
+
+        /* PROMINENT COFFEE RINGS */
+        @keyframes ring {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.25; }
+            50% { transform: scale(1.4) rotate(180deg); opacity: 0.12; }
+        }
+
+        .coffee-ring {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border: 6px dashed rgba(196, 154, 108, 0.35);
+            border-radius: 50%;
+            animation: ring 35s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* SECTION DIVIDER */
+        .section-divider {
+            position: relative;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+            margin: 0 auto;
+            max-width: 200px;
+        }
+
+        /* LOGO STYLES */
+        .logo-container-matt {
+            background: linear-gradient(135deg, #1a2840 0%, #2d3e50 50%, #1a2840 100%);
+            padding: 12px 16px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(26, 40, 64, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .logo-container-matt:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(26, 40, 64, 0.7);
+        }
+
+        .logo-container-matt::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 50%, rgba(0, 0, 0, 0.1) 100%);
+            pointer-events: none;
+        }
+
+        @keyframes logoGlow {
+            0%, 100% { filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5)); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.9)); transform: scale(1.05); }
+        }
+
+        .logo-svg {
+            animation: logoGlow 3s ease-in-out infinite;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container-matt:hover .logo-svg {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(60px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeInUp 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .slide-in-left {
+            animation: slideInLeft 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .slide-in-right {
+            animation: slideInRight 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .scale-in {
+            animation: scaleIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        /* CARD EFFECTS */
+        .luxury-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .luxury-card::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, var(--gold-primary), var(--navy-primary), var(--gold-bright));
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: -1;
+        }
+
+        .luxury-card:hover::before { opacity: 1; }
+
+        .luxury-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 30px 60px rgba(0, 31, 63, 0.3);
+        }
+
+        /* BUTTON STYLES */
+        .btn-premium {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .btn-premium::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 0; height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-premium:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .btn-premium:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.4);
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .btn-shimmer {
+            background: linear-gradient(90deg, var(--gold-bright) 0%, var(--gold-primary) 25%, #FFD700 50%, var(--gold-primary) 75%, var(--gold-bright) 100%);
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(5deg); }
+            66% { transform: translateY(-10px) rotate(-5deg); }
+        }
+
+        .floating { animation: float 6s ease-in-out infinite; }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.08); opacity: 0.9; }
+        }
+
+        .pulse { animation: pulse 2s ease-in-out infinite; }
+
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.5), 0 0 40px rgba(212, 175, 55, 0.3); }
+            50% { box-shadow: 0 0 35px rgba(212, 175, 55, 0.8), 0 0 70px rgba(212, 175, 55, 0.5); }
+        }
+
+        .glow-pulse { animation: glowPulse 2s ease-in-out infinite; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .bounce { animation: bounce 2s ease-in-out infinite; }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .rotate-slow { animation: rotate 20s linear infinite; }
+
+        @keyframes iconBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-8px) scale(1.15); }
+        }
+
+        .badge-icon {
+            display: inline-block;
+            animation: iconBounce 2s ease-in-out infinite;
+        }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: var(--cream-dark); }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--navy-primary), var(--navy-deep));
+            border-radius: 6px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--gold-primary), var(--gold-bright));
+        }
+
+        .border-gradient {
+            border: 2px solid transparent;
+            background: linear-gradient(var(--white), var(--white)) padding-box,
+                        linear-gradient(135deg, var(--gold-primary), var(--navy-primary)) border-box;
+        }
+
+        /* QUANTITY SELECTOR */
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 16px 0;
+        }
+
+        .quantity-btn {
+            width: 36px; height: 36px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--gold-bright), var(--gold-primary));
+            color: var(--navy-deep);
+            font-weight: bold;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-btn:hover {
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 0 8px 20px rgba(196, 154, 108, 0.6);
+        }
+
+        .quantity-input {
+            width: 60px; height: 36px;
+            text-align: center;
+            border: 2px solid var(--gold-primary);
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            color: var(--navy-deep);
+            transition: all 0.3s ease;
+        }
+
+        .quantity-input:focus {
+            outline: none;
+            border-color: var(--gold-bright);
+            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.3);
+            transform: scale(1.05);
+        }
+
+        .product-card {
+            min-height: 540px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card-actions { margin-top: auto; }
+
+        .image-zoom {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .image-zoom img {
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .image-zoom:hover img {
+            transform: scale(1.15) rotate(2deg);
+        }
+
+        @keyframes textGlow {
+            0%, 100% { text-shadow: 0 0 10px rgba(212, 175, 55, 0.3), 0 0 20px rgba(212, 175, 55, 0.2); }
+            50% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.6), 0 0 40px rgba(212, 175, 55, 0.4); }
+        }
+
+        .text-glow { animation: textGlow 2s ease-in-out infinite; }
+
+        .hover-underline {
+            position: relative;
+            display: inline-block;
+        }
+
+        .hover-underline::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -5px;
+            left: 50%;
+            background: linear-gradient(90deg, var(--gold-bright), var(--gold-primary));
+            transition: all 0.4s ease;
+            transform: translateX(-50%);
+        }
+
+        .hover-underline:hover::after { width: 100%; }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleX(1); }
+            50% { transform: scaleX(1.1); }
+        }
+
+        .wave-divider { animation: wave 3s ease-in-out infinite; }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy-deep': '#001F3F',
+                        'navy-primary': '#003366',
+                        'navy-accent': '#1A4D7F',
+                        'gold-primary': '#C49A6C',
+                        'gold-bright': '#D4AF37',
+                        'gold-light': '#E8D4B0',
+                        'cream-dark': '#F5EFE7',
+                        'cream-light': '#FAF7F2',
+                        'charcoal': '#2C3E50',
+                        'slate': '#576574',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-cream-light">
+
+    <!-- Navigation -->
+    <nav class="bg-gradient-to-r from-navy-deep via-navy-primary to-navy-deep shadow-2xl fixed w-full z-50 backdrop-blur-lg bg-opacity-95 border-b-2 border-gold-primary/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-24 items-center">
+                <div class="flex items-center space-x-4 group cursor-pointer">
+                    <div class="logo-container-matt">
+                        <svg class="logo-svg h-14 w-14" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="100" cy="100" r="90" fill="url(#logoGradient)" opacity="0.2"/>
+                            <circle cx="100" cy="100" r="75" fill="none" stroke="url(#logoGradient)" stroke-width="3"/>
+                            <path d="M70 80 Q70 70 80 70 L120 70 Q130 70 130 80 L130 130 Q130 140 120 140 L80 140 Q70 140 70 130 Z" 
+                                  fill="url(#logoGradient)" stroke="#FFFFFF" stroke-width="2"/>
+                            <path d="M85 55 Q85 45 90 50" stroke="#D4AF37" stroke-width="2" fill="none" opacity="0.7">
+                                <animate attributeName="opacity" values="0.7;0.3;0.7" dur="2s" repeatCount="indefinite"/>
+                            </path>
+                            <path d="M100 50 Q100 40 105 45" stroke="#D4AF37" stroke-width="2" fill="none" opacity="0.7">
+                                <animate attributeName="opacity" values="0.3;0.7;0.3" dur="2s" repeatCount="indefinite"/>
+                            </path>
+                            <path d="M115 55 Q115 45 110 50" stroke="#D4AF37" stroke-width="2" fill="none" opacity="0.7">
+                                <animate attributeName="opacity" values="0.7;0.3;0.7" dur="2s" repeatCount="indefinite"/>
+                            </path>
+                            <text x="100" y="115" font-family="serif" font-size="40" font-weight="bold" fill="#FFFFFF" text-anchor="middle">PI</text>
+                            <defs>
+                                <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#D4AF37"/>
+                                    <stop offset="50%" stop-color="#C49A6C"/>
+                                    <stop offset="100%" stop-color="#D4AF37"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="hidden md:block">
+                        <span class="text-3xl font-bold heading-font text-white tracking-tight group-hover:text-gold-bright transition-colors duration-300 hover-underline">Pacific International</span>
+                        <p class="text-[10px] text-gold-light tracking-[0.3em] uppercase font-semibold">Premium Global Trade</p>
+                    </div>
+                </div>
+
+                <div class="hidden lg:flex space-x-8">
+                    <a href="#home" class="text-cream-dark hover:text-gold-bright font-semibold transition-all duration-300 hover:scale-110 text-sm tracking-wide hover-underline">Home</a>
+                    <a href="#about" class="text-cream-dark hover:text-gold-bright font-semibold transition-all duration-300 hover:scale-110 text-sm tracking-wide hover-underline">About</a>
+                    <a href="#products" class="text-cream-dark hover:text-gold-bright font-semibold transition-all duration-300 hover:scale-110 text-sm tracking-wide hover-underline">Products</a>
+                    <a href="#services" class="text-cream-dark hover:text-gold-bright font-semibold transition-all duration-300 hover:scale-110 text-sm tracking-wide hover-underline">Services</a>
+                    <a href="#certifications" class="text-cream-dark hover:text-gold-bright font-semibold transition-all duration-300 hover:scale-110 text-sm tracking-wide hover-underline">Certifications</a>
+                    <a href="#contact" class="text-cream-dark hover:text-gold-bright font-semibold transition-all duration-300 hover:scale-110 text-sm tracking-wide hover-underline">Contact</a>
+                </div>
+
+                <div class="lg:hidden">
+                    <button id="menu-toggle" class="text-gold-bright hover:text-white transition-all duration-300 hover:scale-110 hover:rotate-90">
+                        <i data-feather="menu" width="32" height="32"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden lg:hidden bg-navy-deep shadow-2xl border-t border-gold-primary/20">
+            <div class="px-6 py-8 space-y-5">
+                <a href="#home" class="block text-cream-dark hover:text-gold-bright font-semibold transition-all duration-300 hover:translate-x-2 py-2">Home</a>
+                <a href="#about" class="block text-cream-dark hover:text-gold-bright font-semibold transition-all duration-300 hover:translate-x-2 py-2">About</a>
+                <a href="#products" class="block text-cream-dark hover:text-gold-bright font-semibold transition-all duration-300 hover:translate-x-2 py-2">Products</a>
+                <a href="#services" class="block text-cream-dark hover:text-gold-bright font-semibold transition-all duration-300 hover:translate-x-2 py-2">Services</a>
+                <a href="#certifications" class="block text-cream-dark hover:text-gold-bright font-semibold transition-all duration-300 hover:translate-x-2 py-2">Certifications</a>
+                <a href="#contact" class="block text-cream-dark hover:text-gold-bright font-semibold transition-all duration-300 hover:translate-x-2 py-2">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section - NO LIGHT BLUE LINE -->
+    <div id="home" class="relative overflow-hidden min-h-screen flex items-center bg-gradient-to-br from-navy-deep via-navy-primary to-navy-accent">
+        <div id="vanta-bg" class="vanta-bg"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-navy-deep/90 via-navy-primary/80 to-navy-accent/70 z-0"></div>
+
+        <!-- PROMINENT FLOATING COFFEE BEANS -->
+        <div class="coffee-bean bean-1" style="top: 15%; left: 10%;">☕</div>
+        <div class="coffee-bean bean-2" style="top: 25%; right: 15%;">☕</div>
+        <div class="coffee-bean bean-3" style="bottom: 30%; left: 20%;">☕</div>
+        <div class="coffee-bean bean-4" style="bottom: 20%; right: 10%;">☕</div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
+            <div class="text-center">
+                <div class="inline-block mb-8 fade-in">
+                    <div class="bg-gradient-to-r from-gold-primary via-gold-bright to-gold-primary text-navy-deep px-8 py-3 rounded-full text-sm font-bold tracking-widest uppercase shadow-2xl pulse border-2 border-white/30 glow-pulse">
+                        ✦ Est. 2025 ✦ Premium Coffee Traders
+                    </div>
+                </div>
+
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold heading-font text-white mb-8 leading-tight slide-in-left">
+                    Elevating Global<br/>
+                    <span class="text-gold-bright text-glow">Coffee Trade</span>
+                </h1>
+
+                <p class="text-xl md:text-2xl text-cream-dark mb-12 max-w-4xl mx-auto leading-relaxed font-light slide-in-right" style="animation-delay: 0.3s;">
+                    Sourcing premium Arabica and Robusta from India's finest estates in
+                    <span class="text-gold-bright font-semibold">Coorg, Wayanad & Chikmagalur</span>. Delivering excellence to roasters, distributors, and cafes worldwide.
+                </p>
+
+                <div class="flex flex-col sm:flex-row justify-center gap-6 mb-16 scale-in" style="animation-delay: 0.5s;">
+                    <a href="#products" class="btn-premium btn-shimmer text-navy-deep font-bold py-5 px-12 rounded-full transition-all duration-500 shadow-2xl text-lg border-2 border-white/20 relative overflow-hidden group">
+                        <span class="relative z-10">Explore Our Collection</span>
+                        <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                    </a>
+                    <a href="#partner" class="btn-premium bg-white/10 hover:bg-white/20 border-2 border-gold-bright text-white font-bold py-5 px-12 rounded-full transition-all duration-500 backdrop-blur-md text-lg relative overflow-hidden group">
+                        <span class="relative z-10">Enquire</span>
+                        <div class="absolute inset-0 bg-gold-bright/20 transform scale-0 group-hover:scale-100 transition-transform duration-500 rounded-full"></div>
+                    </a>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-8 text-cream-dark text-sm fade-in" style="animation-delay: 0.7s;">
+                    <div class="flex items-center space-x-3 bg-white/10 backdrop-blur-md px-8 py-4 rounded-full border-2 border-gold-bright/40 hover:bg-white/15 hover:scale-110 transition-all duration-300 glow-pulse shadow-2xl">
+                        <i data-feather="shield" class="text-gold-bright badge-icon" width="24" height="24"></i>
+                        <span class="font-bold text-base">ISO 9001:2015 Certified</span>
+                    </div>
+                    <div class="flex items-center space-x-3 bg-white/10 backdrop-blur-md px-8 py-4 rounded-full border-2 border-gold-bright/40 hover:bg-white/15 hover:scale-110 transition-all duration-300 glow-pulse shadow-2xl" style="animation-delay: 0.3s;">
+                        <i data-feather="globe" class="text-gold-bright badge-icon" width="24" height="24" style="animation-delay: 0.3s;"></i>
+                        <span class="font-bold text-base">Global Export Excellence</span>
+                    </div>
+                    <div class="flex items-center space-x-3 bg-white/10 backdrop-blur-md px-8 py-4 rounded-full border-2 border-gold-bright/40 hover:bg-white/15 hover:scale-110 transition-all duration-300 glow-pulse shadow-2xl" style="animation-delay: 0.6s;">
+                        <i data-feather="award" class="text-gold-bright badge-icon" width="24" height="24" style="animation-delay: 0.6s;"></i>
+                        <span class="font-bold text-base">Premium Quality Assured</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <div id="about" class="py-20 bg-gradient-to-b from-cream-light to-white relative overflow-hidden">
+        <!-- DECORATIVE ELEMENTS -->
+        <div class="coffee-ring" style="top: -20%; left: -15%;"></div>
+        <div class="coffee-ring" style="bottom: -20%; right: -20%; animation-delay: 10s;"></div>
+        <div class="coffee-bean bean-1" style="top: 12%; left: 6%;">☕</div>
+        <div class="coffee-bean bean-2" style="top: 28%; right: 10%;">☕</div>
+        <div class="coffee-bean bean-3" style="bottom: 18%; left: 12%;">☕</div>
+        <div class="coffee-bean bean-4" style="bottom: 32%; right: 8%;">☕</div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-20 fade-in">
+                <h2 class="text-5xl md:text-6xl font-bold heading-font text-navy-deep mb-6">Our Heritage of Excellence</h2>
+                <div class="section-divider wave-divider mb-8"></div>
+                <p class="text-slate text-xl max-w-3xl mx-auto leading-relaxed">
+                    From India's legendary coffee plantations to your cup, we ensure every bean embodies authenticity and premium quality
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-20 items-center">
+                <div class="slide-in-left">
+                    <h3 class="text-4xl font-bold heading-font text-navy-deep mb-8">Crafting Global Connections Since 2025</h3>
+                    <p class="text-slate mb-6 leading-relaxed text-lg">
+                        Pacific International was founded with a singular vision: to bridge the world's finest coffee roasters with India's most prestigious estates. From the verdant hills of Coorg to the aromatic valleys of Wayanad, we've built lasting relationships with plantation owners who share our commitment to excellence.
+                    </p>
+                    <p class="text-slate mb-10 leading-relaxed text-lg">
+                        Today, our beans grace specialty cafes from Tokyo to Toronto, bringing the unique terroir of Southern Indian coffee to discerning consumers worldwide. Our commitment to transparency, fair trade practices, and sustainable sourcing sets us apart in the global marketplace.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 border-gradient luxury-card text-center">
+                            <div class="bg-gradient-to-br from-gold-bright to-gold-primary p-5 rounded-2xl mb-6 inline-block rotate-slow">
+                                <i data-feather="coffee" class="text-white" width="32" height="32"></i>
+                            </div>
+                            <span class="font-bold text-navy-deep text-lg whitespace-nowrap block">Direct Sourcing</span>
+                        </div>
+                        <div class="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 border-gradient luxury-card text-center">
+                            <div class="bg-gradient-to-br from-gold-bright to-gold-primary p-5 rounded-2xl mb-6 inline-block bounce">
+                                <i data-feather="shield" class="text-white" width="32" height="32"></i>
+                            </div>
+                            <span class="font-bold text-navy-deep text-lg whitespace-nowrap block">Certified Quality</span>
+                        </div>
+                        <div class="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 border-gradient luxury-card text-center">
+                            <div class="bg-gradient-to-br from-gold-bright to-gold-primary p-5 rounded-2xl mb-6 inline-block pulse">
+                                <i data-feather="globe" class="text-white" width="32" height="32"></i>
+                            </div>
+                            <span class="font-bold text-navy-deep text-lg whitespace-nowrap block">Global Network</span>
+                        </div>
+                        <div class="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 border-gradient luxury-card text-center">
+                            <div class="bg-gradient-to-br from-gold-bright to-gold-primary p-5 rounded-2xl mb-6 inline-block floating">
+                                <i data-feather="trending-up" class="text-white" width="32" height="32"></i>
+                            </div>
+                            <span class="font-bold text-navy-deep text-lg whitespace-nowrap block">Sustainable Growth</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative slide-in-right" style="animation-delay: 0.3s;">
+                    <div class="absolute -inset-6 bg-gradient-to-br from-gold-bright via-gold-primary to-navy-accent rounded-3xl opacity-20 blur-3xl"></div>
+                    <div class="image-zoom">
+                        <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&h=800&fit=crop" alt="Coffee Plantation" class="rounded-3xl shadow-2xl relative z-10 border-4 border-white">
+                    </div>
+                    <div class="absolute -bottom-8 -right-8 bg-gradient-to-br from-gold-bright to-gold-primary text-white p-10 rounded-3xl shadow-2xl z-20 border-4 border-white pulse">
+                        <div class="text-5xl font-bold heading-font mb-2">100%</div>
+                        <div class="text-sm font-semibold tracking-wider">AUTHENTIC</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Section -->
+    <div id="products" class="py-20 bg-gradient-to-b from-white to-cream-light relative overflow-hidden">
+        <!-- DECORATIVE COFFEE ELEMENTS -->
+        <div class="coffee-bean bean-3" style="top: 8%; left: 4%;">☕</div>
+        <div class="coffee-bean bean-4" style="top: 28%; right: 6%;">☕</div>
+        <div class="coffee-bean bean-1" style="bottom: 12%; left: 10%;">☕</div>
+        <div class="coffee-bean bean-2" style="bottom: 32%; right: 5%;">☕</div>
+        <div class="coffee-ring" style="top: 15%; right: -12%; animation-delay: 5s;"></div>
+        <div class="coffee-ring" style="bottom: 20%; left: -18%; animation-delay: 18s;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-20 fade-in">
+                <h2 class="text-5xl md:text-6xl font-bold heading-font text-navy-deep mb-6">Premium Product Portfolio</h2>
+                <div class="section-divider wave-divider mb-8"></div>
+                <p class="text-slate max-w-3xl mx-auto text-xl leading-relaxed">
+                    Curated selection of exceptional coffee beans from India's finest regions
+                </p>
+            </div>
+
+            <!-- Category Filter -->
+            <div class="flex flex-wrap justify-center gap-5 mb-20 fade-in" style="animation-delay: 0.2s;">
+                <button onclick="filterProducts('all', this)" class="filter-btn active-filter bg-gradient-to-r from-navy-deep to-navy-primary text-white px-10 py-4 rounded-full font-bold hover:from-gold-bright hover:to-gold-primary hover:text-navy-deep transition-all duration-300 shadow-xl text-sm tracking-wide border-2 border-transparent hover:border-white hover:scale-110">
+                    ALL PRODUCTS
+                </button>
+                <button onclick="filterProducts('coffee', this)" class="filter-btn bg-white text-navy-deep px-10 py-4 rounded-full font-bold hover:bg-gradient-to-r hover:from-gold-bright hover:to-gold-primary transition-all duration-300 shadow-lg text-sm tracking-wide border-2 border-gold-primary/20 hover:scale-110">
+                    COFFEE
+                </button>
+                <button onclick="filterProducts('filter', this)" class="filter-btn bg-white text-navy-deep px-10 py-4 rounded-full font-bold hover:bg-gradient-to-r hover:from-gold-bright hover:to-gold-primary transition-all duration-300 shadow-lg text-sm tracking-wide border-2 border-gold-primary/20 hover:scale-110">
+                    FILTER
+                </button>
+                <button onclick="filterProducts('corporate', this)" class="filter-btn bg-white text-navy-deep px-10 py-4 rounded-full font-bold hover:bg-gradient-to-r hover:from-gold-bright hover:to-gold-primary transition-all duration-300 shadow-lg text-sm tracking-wide border-2 border-gold-primary/20 hover:scale-110">
+                    CORPORATE
+                </button>
+                <button onclick="filterProducts('retail', this)" class="filter-btn bg-white text-navy-deep px-10 py-4 rounded-full font-bold hover:bg-gradient-to-r hover:from-gold-bright hover:to-gold-primary transition-all duration-300 shadow-lg text-sm tracking-wide border-2 border-gold-primary/20 hover:scale-110">
+                    RETAIL
+                </button>
+                <button onclick="filterProducts('hotel', this)" class="filter-btn bg-white text-navy-deep px-10 py-4 rounded-full font-bold hover:bg-gradient-to-r hover:from-gold-bright hover:to-gold-primary transition-all duration-300 shadow-lg text-sm tracking-wide border-2 border-gold-primary/20 hover:scale-110">
+                    HOTEL
+                </button>
+                <button onclick="filterProducts('beans', this)" class="filter-btn bg-white text-navy-deep px-10 py-4 rounded-full font-bold hover:bg-gradient-to-r hover:from-gold-bright hover:to-gold-primary transition-all duration-300 shadow-lg text-sm tracking-wide border-2 border-gold-primary/20 hover:scale-110">
+                    BEANS
+                </button>
+            </div>
+
+            <!-- Product Grid -->
+            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <div id="services" class="py-20 bg-white relative overflow-hidden">
+        <!-- DECORATIVE RINGS -->
+        <div class="coffee-ring" style="top: 0%; left: -25%;"></div>
+        <div class="coffee-ring" style="bottom: -15%; right: -20%; animation-delay: 15s;"></div>
+        <div class="coffee-bean bean-2" style="top: 18%; right: 12%;">☕</div>
+        <div class="coffee-bean bean-3" style="bottom: 22%; left: 14%;">☕</div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-20 fade-in">
+                <h2 class="text-5xl md:text-6xl font-bold heading-font text-navy-deep mb-6">Comprehensive Trade Services</h2>
+                <div class="section-divider wave-divider mb-8"></div>
+                <p class="text-slate text-xl max-w-3xl mx-auto leading-relaxed">Full-spectrum import-export solutions tailored for the global coffee industry</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="bg-gradient-to-br from-cream-light to-white p-12 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border-gradient luxury-card group fade-in">
+                    <div class="bg-gradient-to-br from-gold-bright to-gold-primary w-24 h-24 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg">
+                        <i data-feather="package" class="text-white" width="40" height="40"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold heading-font text-navy-deep mb-5">Premium Sourcing</h3>
+                    <p class="text-slate leading-relaxed text-base">Direct partnerships with elite coffee estates ensuring authentic, traceable, and exceptional quality beans</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-cream-light to-white p-12 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border-gradient luxury-card group fade-in" style="animation-delay: 0.1s;">
+                    <div class="bg-gradient-to-br from-gold-bright to-gold-primary w-24 h-24 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg">
+                        <i data-feather="send" class="text-white" width="40" height="40"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold heading-font text-navy-deep mb-5">Export Excellence</h3>
+                    <p class="text-slate leading-relaxed text-base">End-to-end export management including documentation, compliance, and global logistics coordination</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-cream-light to-white p-12 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border-gradient luxury-card group fade-in" style="animation-delay: 0.2s;">
+                    <div class="bg-gradient-to-br from-gold-bright to-gold-primary w-24 h-24 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg">
+                        <i data-feather="truck" class="text-white" width="40" height="40"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold heading-font text-navy-deep mb-5">Global Logistics</h3>
+                    <p class="text-slate leading-relaxed text-base">Climate-controlled storage, freight forwarding, and supply chain optimization for coffee preservation</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-cream-light to-white p-12 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border-gradient luxury-card group fade-in" style="animation-delay: 0.3s;">
+                    <div class="bg-gradient-to-br from-gold-bright to-gold-primary w-24 h-24 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg">
+                        <i data-feather="file-text" class="text-white" width="40" height="40"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold heading-font text-navy-deep mb-5">Trade Documentation</h3>
+                    <p class="text-slate leading-relaxed text-base">Expert handling of customs clearance, phytosanitary certificates, and international compliance</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-cream-light to-white p-12 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border-gradient luxury-card group fade-in" style="animation-delay: 0.4s;">
+                    <div class="bg-gradient-to-br from-gold-bright to-gold-primary w-24 h-24 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg">
+                        <i data-feather="check-circle" class="text-white" width="40" height="40"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold heading-font text-navy-deep mb-5">Quality Assurance</h3>
+                    <p class="text-slate leading-relaxed text-base">Professional cupping, grading, and certification ensuring specialty coffee standards compliance</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-cream-light to-white p-12 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border-gradient luxury-card group fade-in" style="animation-delay: 0.5s;">
+                    <div class="bg-gradient-to-br from-gold-bright to-gold-primary w-24 h-24 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg">
+                        <i data-feather="users" class="text-white" width="40" height="40"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold heading-font text-navy-deep mb-5">Market Intelligence</h3>
+                    <p class="text-slate leading-relaxed text-base">Strategic insights on coffee market trends, pricing strategies, and partnership opportunities</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Certifications Section -->
+    <div id="certifications" class="py-20 bg-gradient-to-b from-cream-light to-white relative overflow-hidden">
+        <!-- DECORATIVE ELEMENTS -->
+        <div class="coffee-bean bean-1" style="top: 10%; left: 7%;">☕</div>
+        <div class="coffee-bean bean-4" style="top: 22%; right: 9%;">☕</div>
+        <div class="coffee-bean bean-2" style="bottom: 16%; left: 11%;">☕</div>
+        <div class="coffee-bean bean-3" style="bottom: 28%; right: 6%;">☕</div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-20 fade-in">
+                <h2 class="text-5xl md:text-6xl font-bold heading-font text-navy-deep mb-6">Certifications & Compliance</h2>
+                <div class="section-divider wave-divider mb-8"></div>
+                <p class="text-slate max-w-3xl mx-auto text-xl leading-relaxed">Our excellence validated through internationally recognized certifications and standards</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-10">
+                <div class="bg-white p-10 rounded-3xl text-center hover:shadow-2xl transition-all duration-500 border-gradient luxury-card group fade-in">
+                    <div class="bg-gradient-to-br from-navy-deep to-navy-primary text-white text-5xl font-bold heading-font w-28 h-28 rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-xl">ISO</div>
+                    <h4 class="font-bold heading-font text-navy-deep mb-3 text-xl">ISO 9001:2015</h4>
+                    <p class="text-sm text-slate font-medium">Quality Management</p>
+                </div>
+
+                <div class="bg-white p-10 rounded-3xl text-center hover:shadow-2xl transition-all duration-500 border-gradient luxury-card group fade-in" style="animation-delay: 0.1s;">
+                    <div class="bg-gradient-to-br from-navy-deep to-navy-primary text-white text-4xl font-bold heading-font w-28 h-28 rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-xl">FSSAI</div>
+                    <h4 class="font-bold heading-font text-navy-deep mb-3 text-xl">FSSAI Licensed</h4>
+                    <p class="text-sm text-slate font-medium">Food Safety Standards</p>
+                </div>
+
+                <div class="bg-white p-10 rounded-3xl text-center hover:shadow-2xl transition-all duration-500 border-gradient luxury-card group fade-in" style="animation-delay: 0.2s;">
+                    <div class="bg-gradient-to-br from-navy-deep to-navy-primary text-white text-4xl font-bold heading-font w-28 h-28 rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-xl">APEDA</div>
+                    <h4 class="font-bold heading-font text-navy-deep mb-3 text-xl">APEDA Certified</h4>
+                    <p class="text-sm text-slate font-medium">Agricultural Exports</p>
+                </div>
+
+                <div class="bg-white p-10 rounded-3xl text-center hover:shadow-2xl transition-all duration-500 border-gradient luxury-card group fade-in" style="animation-delay: 0.3s;">
+                    <div class="bg-gradient-to-br from-navy-deep to-navy-primary text-white text-4xl font-bold heading-font w-28 h-28 rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-xl">GST</div>
+                    <h4 class="font-bold heading-font text-navy-deep mb-3 text-xl">GST Compliant</h4>
+                    <p class="text-sm text-slate font-medium">Tax Registration</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Partner Section -->
+    <div id="partner" class="py-20 bg-gradient-to-br from-navy-deep via-navy-primary to-navy-accent text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-20 left-20 w-96 h-96 bg-gold-bright rounded-full blur-3xl floating"></div>
+            <div class="absolute bottom-20 right-20 w-96 h-96 bg-gold-primary rounded-full blur-3xl floating" style="animation-delay: 2s;"></div>
+        </div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-5xl md:text-6xl font-bold heading-font mb-6">Join Our Global Network</h2>
+                <p class="text-2xl text-gold-light leading-relaxed">Access India's finest coffee</p>
+            </div>
+
+            <form class="bg-white/10 backdrop-blur-xl rounded-3xl p-12 border-2 border-gold-primary/30 shadow-2xl fade-in luxury-card" style="animation-delay: 0.2s;">
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <label class="block font-bold mb-4 text-cream-dark text-sm tracking-wide">FULL NAME *</label>
+                        <input type="text" class="w-full px-6 py-5 bg-white/95 border-2 border-gold-primary/20 rounded-2xl focus:outline-none focus:ring-4 focus:ring-gold-bright/50 focus:border-gold-bright transition-all text-navy-deep font-medium hover:scale-105" required>
+                    </div>
+                    <div>
+                        <label class="block font-bold mb-4 text-cream-dark text-sm tracking-wide">COMPANY NAME *</label>
+                        <input type="text" class="w-full px-6 py-5 bg-white/95 border-2 border-gold-primary/20 rounded-2xl focus:outline-none focus:ring-4 focus:ring-gold-bright/50 focus:border-gold-bright transition-all text-navy-deep font-medium hover:scale-105" required>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <label class="block font-bold mb-4 text-cream-dark text-sm tracking-wide">EMAIL ADDRESS *</label>
+                        <input type="email" class="w-full px-6 py-5 bg-white/95 border-2 border-gold-primary/20 rounded-2xl focus:outline-none focus:ring-4 focus:ring-gold-bright/50 focus:border-gold-bright transition-all text-navy-deep font-medium hover:scale-105" required>
+                    </div>
+                    <div>
+                        <label class="block font-bold mb-4 text-cream-dark text-sm tracking-wide">PHONE NUMBER *</label>
+                        <input type="tel" class="w-full px-6 py-5 bg-white/95 border-2 border-gold-primary/20 rounded-2xl focus:outline-none focus:ring-4 focus:ring-gold-bright/50 focus:border-gold-bright transition-all text-navy-deep font-medium hover:scale-105" required>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <label class="block font-bold mb-4 text-cream-dark text-sm tracking-wide">BUSINESS TYPE *</label>
+                    <select class="w-full px-6 py-5 bg-white/95 border-2 border-gold-primary/20 rounded-2xl focus:outline-none focus:ring-4 focus:ring-gold-bright/50 focus:border-gold-bright transition-all text-navy-deep font-medium hover:scale-105" required>
+                        <option value="">Select Business Type</option>
+                        <option value="roaster">Coffee Roaster</option>
+                        <option value="distributor">Distributor</option>
+                        <option value="cafe">Café / Restaurant</option>
+                        <option value="retailer">Retailer</option>
+                        <option value="importer">Importer</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="mb-10">
+                    <label class="block font-bold mb-4 text-cream-dark text-sm tracking-wide">MESSAGE</label>
+                    <textarea class="w-full px-6 py-5 bg-white/95 border-2 border-gold-primary/20 rounded-2xl focus:outline-none focus:ring-4 focus:ring-gold-bright/50 focus:border-gold-bright transition-all text-navy-deep font-medium h-40 resize-none hover:scale-105" placeholder="Tell us about your requirements..."></textarea>
+                </div>
+
+                <button type="submit" class="w-full btn-premium btn-shimmer text-navy-deep font-bold py-6 rounded-2xl transition-all duration-500 shadow-2xl text-lg tracking-wide">
+                    SUBMIT ENQUIRY REQUEST
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div id="contact" class="py-20 bg-white relative overflow-hidden">
+        <!-- DECORATIVE ELEMENTS -->
+        <div class="coffee-ring" style="top: -15%; left: -20%;"></div>
+        <div class="coffee-ring" style="bottom: -10%; right: -25%; animation-delay: 12s;"></div>
+        <div class="coffee-bean bean-2" style="top: 16%; left: 9%;">☕</div>
+        <div class="coffee-bean bean-3" style="bottom: 18%; right: 11%;">☕</div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-20 fade-in">
+                <h2 class="text-5xl md:text-6xl font-bold heading-font text-navy-deep mb-6">Get In Touch</h2>
+                <div class="section-divider wave-divider mb-8"></div>
+                <p class="text-slate text-xl max-w-3xl mx-auto leading-relaxed">Reach out to us for inquiries or to learn more about our premium coffee products</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-10">
+                <a href="mailto:Pacificinternational256@gmail.com" class="bg-gradient-to-br from-cream-light to-white p-12 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border-gradient luxury-card group text-center">
+                    <div class="bg-gradient-to-br from-gold-bright to-gold-primary w-24 h-24 rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg">
+                        <i data-feather="mail" class="text-white" width="40" height="40"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold heading-font text-navy-deep mb-3">Email Us</h3>
+                    <p class="text-gold-primary font-semibold break-all">Pacificinternational256@gmail.com</p>
+                </a>
+
+                <a href="tel:+919876543210" class="bg-gradient-to-br from-cream-light to-white p-12 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border-gradient luxury-card group text-center">
+                    <div class="bg-gradient-to-br from-gold-bright to-gold-primary w-24 h-24 rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg">
+                        <i data-feather="phone" class="text-white" width="40" height="40"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold heading-font text-navy-deep mb-3">Call Us</h3>
+                    <p class="text-gold-primary font-semibold">+91 9876543210</p>
+                </a>
+
+                <a href="https://maps.google.com" target="_blank" class="bg-gradient-to-br from-cream-light to-white p-12 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border-gradient luxury-card group text-center">
+                    <div class="bg-gradient-to-br from-gold-bright to-gold-primary w-24 h-24 rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg">
+                        <i data-feather="map-pin" class="text-white" width="40" height="40"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold heading-font text-navy-deep mb-3">Visit Us</h3>
+                    <p class="text-gold-primary font-semibold">Surat, Gujarat</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-navy-deep via-navy-primary to-navy-deep text-white py-16 border-t-4 border-gold-primary/30 relative overflow-hidden">
+        <!-- DECORATIVE COFFEE BEANS -->
+        <div class="coffee-bean bean-1" style="top: 10%; left: 5%;">☕</div>
+        <div class="coffee-bean bean-3" style="top: 20%; right: 8%;">☕</div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <h3 class="text-2xl font-bold heading-font mb-6 text-gold-bright">Pacific International</h3>
+                    <p class="text-cream-dark leading-relaxed">Premium coffee trade solutions connecting India with the world</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6 text-gold-bright">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-cream-dark hover:text-gold-bright transition hover:translate-x-2 inline-block">Home</a></li>
+                        <li><a href="#about" class="text-cream-dark hover:text-gold-bright transition hover:translate-x-2 inline-block">About</a></li>
+                        <li><a href="#products" class="text-cream-dark hover:text-gold-bright transition hover:translate-x-2 inline-block">Products</a></li>
+                        <li><a href="#services" class="text-cream-dark hover:text-gold-bright transition hover:translate-x-2 inline-block">Services</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6 text-gold-bright">Contact</h4>
+                    <ul class="space-y-3">
+                        <li><a href="mailto:Pacificinternational256@gmail.com" class="text-cream-dark hover:text-gold-bright transition break-all">Email Us</a></li>
+                        <li><a href="tel:+919876543210" class="text-cream-dark hover:text-gold-bright transition">Call Us</a></li>
+                        <li class="text-cream-dark">Surat, Gujarat</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6 text-gold-bright">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="bg-white/10 p-3 rounded-xl hover:bg-gold-primary transition-all duration-300 hover:scale-110 hover:rotate-12"><i data-feather="facebook" width="20" height="20"></i></a>
+                        <a href="#" class="bg-white/10 p-3 rounded-xl hover:bg-gold-primary transition-all duration-300 hover:scale-110 hover:rotate-12"><i data-feather="linkedin" width="20" height="20"></i></a>
+                        <a href="#" class="bg-white/10 p-3 rounded-xl hover:bg-gold-primary transition-all duration-300 hover:scale-110 hover:rotate-12"><i data-feather="instagram" width="20" height="20"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gold-primary/20 pt-8 text-center text-cream-dark">
+                <p>&copy; 2025 Pacific International. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        feather.replace();
+
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        const productDatabase = [
+            {
+                id: 1,
+                name: "Premium Arabica Beans",
+                category: "coffee",
+                origin: "Coorg, Karnataka",
+                description: "Award-winning Arabica with chocolate and caramel notes. Exceptional quality for discerning roasters.",
+                image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&h=500&fit=crop",
+                grade: "Grade A"
+            },
+            {
+                id: 2,
+                name: "Bold Robusta Coffee",
+                category: "coffee",
+                origin: "Wayanad, Kerala",
+                description: "Strong, full-bodied Robusta ideal for espresso blends. High caffeine content.",
+                image: "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=600&h=500&fit=crop",
+                grade: "Grade AA"
+            },
+            {
+                id: 3,
+                name: "Monsooned Malabar",
+                category: "filter",
+                origin: "Malabar Coast",
+                description: "Unique monsoon-processed specialty coffee with earthy notes and heavy body.",
+                image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&h=500&fit=crop",
+                grade: "Specialty"
+            },
+            {
+                id: 4,
+                name: "Corporate Blend Premium",
+                category: "corporate",
+                origin: "Chikmagalur",
+                description: "Perfect blend for office environments with balanced flavor profile.",
+                image: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&h=500&fit=crop",
+                grade: "Premium"
+            },
+            {
+                id: 5,
+                name: "Retail Ready Ground Coffee",
+                category: "retail",
+                origin: "Mixed Estates",
+                description: "Pre-ground coffee ready for retail shelves with consistent quality.",
+                image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&h=500&fit=crop",
+                grade: "Grade A"
+            },
+            {
+                id: 6,
+                name: "Hotel & Restaurant Blend",
+                category: "hotel",
+                origin: "Premium Estates",
+                description: "Bulk coffee perfect for hospitality industry with excellent consistency.",
+                image: "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=600&h=500&fit=crop",
+                grade: "Professional"
+            },
+            {
+                id: 7,
+                name: "Organic Coffee Beans",
+                category: "beans",
+                origin: "Coorg Estates",
+                description: "Certified organic beans grown without synthetic fertilizers or pesticides.",
+                image: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&h=500&fit=crop",
+                grade: "Organic"
+            },
+            {
+                id: 8,
+                name: "Filter Coffee Special",
+                category: "filter",
+                origin: "Chikmagalur",
+                description: "Traditional South Indian filter coffee blend with perfect balance.",
+                image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&h=500&fit=crop",
+                grade: "Premium"
+            },
+            {
+                id: 9,
+                name: "Specialty Estate Beans",
+                category: "beans",
+                origin: "Wayanad",
+                description: "Single-origin estate beans with unique flavor characteristics.",
+                image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&h=500&fit=crop",
+                grade: "Specialty"
+            }
+        ];
+
+        function renderProducts(filtered) {
+            const productGrid = document.getElementById('product-grid');
+            
+            productGrid.innerHTML = filtered.map((product, index) => `
+                <div class="product-card bg-white rounded-3xl shadow-xl overflow-hidden border-gradient luxury-card fade-in" style="animation-delay: ${index * 0.1}s;">
+                    <div class="relative overflow-hidden group image-zoom">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-72 object-cover">
+                        <div class="absolute top-6 right-6 bg-gradient-to-r from-gold-bright to-gold-primary text-navy-deep px-5 py-2 rounded-full text-xs font-bold shadow-2xl border-2 border-white/40 pulse">
+                            ${product.grade}
+                        </div>
+                    </div>
+                    <div class="product-card-content p-10">
+                        <div class="flex items-center text-xs text-gold-primary font-bold uppercase mb-4 tracking-wider">
+                            <i data-feather="map-pin" width="16" height="16" class="mr-2"></i>
+                            ${product.origin}
+                        </div>
+                        <h3 class="text-2xl font-bold heading-font text-navy-deep mb-4">${product.name}</h3>
+                        <p class="text-slate text-sm mb-6 leading-relaxed">${product.description}</p>
+                        
+                        <div class="product-card-actions">
+                            <div class="quantity-selector">
+                                <button onclick="decreaseQuantity(${product.id})" class="quantity-btn">-</button>
+                                <input type="number" id="qty-${product.id}" value="50" min="10" step="10" class="quantity-input" readonly>
+                                <button onclick="increaseQuantity(${product.id})" class="quantity-btn">+</button>
+                            </div>
+                            
+                            <button onclick="requestQuote(${product.id})" class="w-full btn-premium bg-gradient-to-r from-gold-bright to-gold-primary hover:from-navy-deep hover:to-navy-primary text-navy-deep hover:text-white px-8 py-4 rounded-xl text-sm font-bold shadow-xl border-2 border-transparent hover:border-white">
+                                REQUEST QUOTE
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            feather.replace();
+        }
+
+        function filterProducts(category, btn) {
+            const filtered = category === 'all' ? productDatabase : productDatabase.filter(p => p.category === category);
+            renderProducts(filtered);
+
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.remove('bg-gradient-to-r', 'from-navy-deep', 'to-navy-primary', 'text-white', 'active-filter');
+                b.classList.add('bg-white', 'text-navy-deep');
+            });
+
+            btn.classList.remove('bg-white', 'text-navy-deep');
+            btn.classList.add('bg-gradient-to-r', 'from-navy-deep', 'to-navy-primary', 'text-white', 'active-filter');
+        }
+
+        function increaseQuantity(productId) {
+            const input = document.getElementById(`qty-${productId}`);
+            input.value = parseInt(input.value) + 10;
+        }
+
+        function decreaseQuantity(productId) {
+            const input = document.getElementById(`qty-${productId}`);
+            if (parseInt(input.value) > 10) {
+                input.value = parseInt(input.value) - 10;
+            }
+        }
+
+        function requestQuote(productId) {
+            const product = productDatabase.find(p => p.id === productId);
+            const quantity = document.getElementById(`qty-${productId}`).value;
+            
+            const message = `Hello! I'm interested in:\n\nProduct: ${product.name}\nQuantity: ${quantity} kg\nOrigin: ${product.origin}\n\nPlease provide pricing and availability.`;
+            
+            const whatsappUrl = `https://wa.me/919876543210?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        renderProducts(productDatabase);
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        if (typeof VANTA !== 'undefined') {
+            VANTA.FOG({
+                el: "#vanta-bg",
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                highlightColor: 0xc49a6c,
+                midtoneColor: 0x003366,
+                lowlightColor: 0x001f3f,
+                baseColor: 0x001f3f,
+                blurFactor: 0.6,
+                speed: 1.5,
+                zoom: 1.2
+            });
+        }
+    </script>
+</body>
+</html>
